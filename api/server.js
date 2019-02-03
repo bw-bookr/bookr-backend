@@ -1,20 +1,11 @@
 const express = require('express');
-const cors = require('cors');
-const helmet = require('helmet');
-
-// const configureRoutes = require('../config/routes.js');
+const configureMiddleware = require('../config/middleware.js');
+const configureRoutes = require('../config/routes.js');
 
 const server = express();
 
-server.use(helmet());
-server.use(cors());
-server.use(express.json());
-
-server.get('/', (req, res) => {
-  res.send('sanity check')
-})
-
-// configureRoutes(server);
+configureMiddleware(server);
+configureRoutes(server);
 
 module.exports = {
   server,
