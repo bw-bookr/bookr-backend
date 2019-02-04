@@ -10,6 +10,7 @@ router.get('/users', (req, res) => {
   // return only users and id, not passwords
   db('users')
   .then(users => {
+    // only send id and user
     res.status(200).json(users);
   })
   .catch(err => res.status(500).json({
