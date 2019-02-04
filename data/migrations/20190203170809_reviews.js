@@ -2,8 +2,8 @@ exports.up = function(knex, Promise) {
   return knex.schema.createTable("reviews", tbl => {
     tbl.increments();
 
-    tbl.integer('user_id').unsigned().reference('id').inTable('users');
-    tbl.integer('book_id').unsigned().reference('id').inTable('books');
+    tbl.integer('user_id').unsigned().references('id').inTable('users');
+    tbl.integer('book_id').unsigned().references('id').inTable('books');
     tbl.unique(['user_Id', 'book_id']);
 
     tbl.string('review');
