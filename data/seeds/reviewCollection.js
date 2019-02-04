@@ -7,6 +7,7 @@ exports.seed = function(knex, Promise) {
       return knex('reviews').insert([
         {user_id: 1, book_id: 1, rating: 5, review: 'this is a review of a book'},
         {user_id: 1, book_id: 2, rating: 5, review: 'this is a review of a book'},
+        {user_id: 2, book_id: 1, rating: 5, review: 'this is a review of a book'},
       ]);
     });
 };
