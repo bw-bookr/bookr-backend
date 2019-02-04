@@ -9,11 +9,13 @@ exports.up = function(knex, Promise) {
 
     tbl.string('publisher', 255);
 
-    tbl.string('cover_location');
+    tbl.string('year', 20);
 
-    tbl.string('small_discription', 255);
+    tbl.string('cover_url');
 
-    tbl.string('large_discription');
+    tbl.string('short_description', 255);
+
+    tbl.string('full_description');
 
     tbl.timestamps(true, true);
   });
