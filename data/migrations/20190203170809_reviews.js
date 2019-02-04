@@ -6,6 +6,9 @@ exports.up = function(knex, Promise) {
     tbl.integer('book_id').unsigned().references('id').inTable('books');
     tbl.unique(['user_Id', 'book_id']);
 
+    tbl.integer('rating').notNullable();
+
+
     tbl.string('review');
 
     tbl.timestamps(true, true);
