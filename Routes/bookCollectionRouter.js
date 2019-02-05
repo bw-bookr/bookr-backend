@@ -109,8 +109,4 @@ router.put('/edit_review/:book_id', validateToken, (req, res) => {
 // stretch
 // aggregate books and compare prices
 
-// MVP
-// add a review to a book
-// delete a review to a book
-
 module.exports = router;

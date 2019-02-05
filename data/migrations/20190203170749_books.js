@@ -7,7 +7,7 @@ exports.up = function(knex, Promise) {
 
     tbl.string('auther', 255).notNullable();
 
-    tbl.string('publisher', 255);
+    tbl.string('publisher', 255).notNullable();
 
     tbl.string('year', 20);
 
