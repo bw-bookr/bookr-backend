@@ -7,10 +7,11 @@ const router = express.Router();
 
   // get list of users for testing
 router.get('/users', (req, res) => {
-  // return only users and id, not passwords
   db('users')
   .then(users => {
-    // only send id and user
+    users = users.map(user => {
+      return {id: user.id, username: user.username}
+    })
     res.status(200).json(users);
   })
   .catch(err => res.status(500).json({
