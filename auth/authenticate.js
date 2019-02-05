@@ -6,8 +6,9 @@ module.exports = {
 };
 
 function generateToken(user) {
-  console.log('generate token')
+
   const payload = {
+    id: user.id,
     username: user.username,
   };
 
