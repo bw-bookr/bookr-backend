@@ -64,7 +64,6 @@ router.post('/add_review/:book_id', validateToken, (req, res) => {
   .catch(err => res.status(500).json({errorMessage: err}))
 });
 
-/////////////////// work in progress /////////////////////////
 
   // delete a review for a book of logged in user, need change endpoint
   // required authentication
@@ -81,17 +80,22 @@ router.delete('/delete_review/:book_id', validateToken, (req, res) => {
   .catch(err => res.status(500).json({errorMessage: err}))
 });
 
+
   // update a review for a book
   // required authentication
 router.put('/edit_review/:book_id', validateToken, (req, res) => {
-  
+  const { book_id } = req.params;
+  const { user_id } = req;
+  const { review, rating } = req.body;
+
+  db('reviews')
+  .where({user_id, book_id})
+  .update({review, rating})
+  .then(count => {
+    res.status(201).json({message: 'changes have been succesfully made'});
+  })
+  .catch(err => res.status(500).json({errorMessage: err}))
 });
-
-
-
-  // retrive full list of reviews made by user
-  // required authentication
-  // extra stretch goal
 
 
 // extra
