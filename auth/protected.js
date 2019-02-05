@@ -2,24 +2,32 @@ require("dotenv").config();
 const jwt = require("jsonwebtoken");
 
 module.exports = {
-  protected
+  validateToken
 };
 
-function protected(req, res, next) {
+function validateToken(req, res, next) {
     
   const token = req.headers.authorization;
-  console.log(req.headers);
 
   if (token) {
-    jwt.verify(token, process.env.JWT_SECRET, (err, decodedToken) => {
+
+    const secret = process.env.JWT_SECRET || 'this is a secret if JWT_SECRET does not exist, but hey here it goes, super long but not really, just for testing;;';
+
+    jwt.verify(token, secret, (err, decodedToken) => {
+      
       if (err) {
-        res.status(401).json({ message: "Invalid token" });
+
+        res.status(401).json({ errorMessage: "Invalid token" });
+
       } else {
-        req.decodedToken = decodedToken;
+        
+        req.user_id = decodedToken.id;
+
         next();
+
       }
     });
   } else {
-    res.status(401).json({ message: "Please provide a token" });
+    res.status(401).json({ errorMessage: "Please provide a token" });
   }
 }
