@@ -30,8 +30,8 @@ router.get('/all_reviews', (req, res) => {
 });
 
   // retrive reviews for selected book and book details
-router.get('/book_review/:id', (req, res) => {
-  const { id } = req.params;
+router.get('/book_review/:book_id', (req, res) => {
+  const { book_id: id } = req.params;
   db('books')
   .where({id})
   .then(book=> {
@@ -45,12 +45,10 @@ router.get('/book_review/:id', (req, res) => {
 });
 
 
-/////////////////// work in progress /////////////////////////
-
   // add a new review for a book
   // required authentication
-router.post('/add_review/:id', validateToken, (req, res) => {
-  const { id: book_id } = req.params;
+router.post('/add_review/:book_id', validateToken, (req, res) => {
+  const { book_id } = req.params;
   const { rating, review } = req.body;
   const { user_id } = req;
 
@@ -64,12 +62,14 @@ router.post('/add_review/:id', validateToken, (req, res) => {
     res.status(201).json({id: id[0], review, rating});
   })
   .catch(err => res.status(500).json({errorMessage: err}))
-})
+});
+
+/////////////////// work in progress /////////////////////////
 
   // delete a review for a book of logged in user, need change endpoint
   // required authentication
-router.delete('/delete_review/:id', validateToken, (req, res) => {
-  const { id: book_id } = req.params;
+router.delete('/delete_review/:book_id', validateToken, (req, res) => {
+  const { book_id } = req.params;
   const { user_id } = req;
 
   db('reviews')
@@ -79,13 +79,13 @@ router.delete('/delete_review/:id', validateToken, (req, res) => {
     res.status(204).end()
   })
   .catch(err => res.status(500).json({errorMessage: err}))
-})
+});
 
   // update a review for a book
   // required authentication
-router.put('/edit_review', validateToken, (req, res) => {
+router.put('/edit_review/:book_id', validateToken, (req, res) => {
   
-})
+});
 
 
 
