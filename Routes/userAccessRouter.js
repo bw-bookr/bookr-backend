@@ -33,7 +33,7 @@ router.post('/register', async (req, res) => {
 
       const newUser = await db('users').insert({ username, password: hash });
 
-      const token = authenticate.generateToken({username});
+      const token = authenticate.generateToken({username, id: newUser.id});
 
       res.status(201).json({username, token});
 

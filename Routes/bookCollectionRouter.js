@@ -1,4 +1,5 @@
 const express = require('express');
+const { validateToken } = require('../auth/protected.js')
 const db = require('../data/dbConfig.js');
 
 const router = express.Router();
@@ -48,23 +49,41 @@ router.get('/book_review/:id', (req, res) => {
 
   // add a new review for a book
   // required authentication
-router.post('/add_review', (req, res) => {
-  const { review, user_id, book_id } = req.body;
-  db(reviews)
-  .insert()
-  .then()
-  .catch()
+router.post('/add_review/:id', validateToken, (req, res) => {
+  const { id: book_id } = req.params;
+  const { rating, review } = req.body;
+  const { user_id } = req;
+
+  if(!review || !book_id) {
+    res.status(400).json({errorMessage: 'invalid input'});
+  }
+
+  db('reviews')
+  .insert({user_id, book_id, review, rating})
+  .then(id => {
+    res.status(201).json({id: id[0], review, rating});
+  })
+  .catch(err => res.status(500).json({errorMessage: err}))
 })
 
-  // delete a review for a book
+  // delete a review for a book of logged in user, need change endpoint
   // required authentication
-router.delete('/delete_review', (req, res) => {
+router.delete('/delete_review/:id', validateToken, (req, res) => {
+  const { id: book_id } = req.params;
+  const { user_id } = req;
 
+  db('reviews')
+  .where({user_id, book_id})
+  .del()
+  .then(count => {
+    res.status(204).end()
+  })
+  .catch(err => res.status(500).json({errorMessage: err}))
 })
 
   // update a review for a book
   // required authentication
-router.put('/edit_review', (req, res) => {
+router.put('/edit_review', validateToken, (req, res) => {
   
 })
 
