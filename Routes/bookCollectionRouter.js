@@ -5,7 +5,6 @@ const router = express.Router();
 
   // retrive list of books
 router.get('/', (req, res) => {
-  // return id, title, cover_url
   db('books')
   .then(books => {
     const bookCollection = books.map(book => {
@@ -29,9 +28,8 @@ router.get('/all_reviews', (req, res) => {
   }))
 });
 
-  // retrive reviews for selected book and book detials
+  // retrive reviews for selected book and book details
 router.get('/book_review/:id', (req, res) => {
-  // sends [{title, auther, publisher, [reviews]}]
   const { id } = req.params;
   db('books')
   .where({id})
@@ -39,8 +37,7 @@ router.get('/book_review/:id', (req, res) => {
     db('reviews')
     .where({book_id: id})
     .then(reviews => {
-      book.reviews = [...reviews];
-      res.status(200).json({...book});
+      res.status(200).json({book: book[0], reviews});
     })
   })
   .catch(err => res.status(500).json({errorMessage: err}))
