@@ -61,7 +61,7 @@ router.post('/login', checkLoginInput, async (req, res) => {
 
       const token = authenticate.generateToken(validateUser);
 
-      res.status(200).json({ username: validateUser.username, token });
+      res.status(200).json({user_id: validateUser.id, username: validateUser.username, token });
 
     } else {
 
