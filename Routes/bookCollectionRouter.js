@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
     const bookCollection = books.map(book => {
       return { id: book.id, title: book.title, cover_url: book.cover_url };
     });
-    res.status(200).json(bookCollection);
+    res.status(200).json(books);
   })
   .catch(err => res.status(500).json({
     errorMessage: err
