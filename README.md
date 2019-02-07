@@ -1,5 +1,23 @@
 # bookr-backend
 
+# what is this API
+- api for bookr app, an review app for books
+- api contains collection of books and reviews, and users
+- users can add reviews and ratings, remove or update reviews
+- users can add a book or delete a book
+
+# how to download and use
+- fork and clone repo
+- `yarn install` and `yarn start`
+- server up and running
+- listening on port 8000
+- user resources `/api/user-access/`
+- book rsources `/api/book-collection/`
+- review resource `/api/book-review/`
+- url for endpoints baseurl + resource + action
+- example  base `http://localhost:8000` or `https://bookr-app-backend.herokuapp.com`
+- example full endpoint url `https://bookr-app-backend.herokuapp.com/api/book-review/book_review/:book_id`
+
 # get method endpoints
 get method `https://bookr-app-backend.herokuapp.com/api/book-collection`
   - retrive list of books from database
