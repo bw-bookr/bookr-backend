@@ -20,52 +20,15 @@ router.get('/all_reviews', (req, res) => {
 router.get('/book_review/:book_id', (req, res) => {
   const { book_id: id } = req.params;
 
-  // db.from('reviews')
-  //   .innerJoin('users', 'reviews.user_id', 'users.id')
-  //   .where('book_id',id)
-  //   .then(reviews => {
-  //     res.status(200).json(reviews);
-  //   })
-  //   .catch(err => res.status(500).json(err))
-
-  // db('reviews').where({book_id: id})..then(reviews => {
-  //   res.status(200).json(reviews);
-  // }).catch(err => res.status(500).json(err))
-
-
   db('books')
   .where({id})
   .then(book=> {
-
     db.from('reviews')
     .innerJoin('users', 'reviews.user_id', 'users.id')
     .where('book_id',id)
     .then(reviews => {
       res.status(200).json({book: book[0], reviews});
     })
-    // db('reviews')
-    // .where({book_id: id})
-    // .then(reviews => {
-      // let r = []
-      // for(let i = 0; i < reviews.length; i++){
-      //   db('users')
-      //   .where({id: reviews[i].user_id})
-      //   .then(user => {
-      //     r.push({username: user.username, review: reviews[i].review});
-      //     console.log(r)
-      //   })
-      // }
-
-      // // const r = reviews.map(review => {
-      // //   let r;
-      // //   db('users')
-      // //   .where({id: review.user_id})
-      // //   .then(user => {
-      // //     r = {username: user.username, review}
-      // //   })
-      // // })
-    //   res.status(200).json({book: book[0], reviews});
-    // })
   })
   .catch(err => res.status(500).json({errorMessage: err}))
 });
