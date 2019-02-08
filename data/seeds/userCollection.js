@@ -8,6 +8,10 @@ exports.seed = function(knex, Promise) {
         {username: 'nomadic', password: bcrypt.hashSync("pass", 12)},
         {username: 'mutiny', password: bcrypt.hashSync("pass", 12)},
         {username: 'expat', password: bcrypt.hashSync("pass", 12)},
+        {username: 'hawk', password: bcrypt.hashSync("pass", 12)},
+        {username: 'wolfpack', password: bcrypt.hashSync("pass", 12)},
+        {username: 'viking', password: bcrypt.hashSync("pass", 12)},
+        {username: 'shinobi', password: bcrypt.hashSync("pass", 12)},
       ]);
     });
 };

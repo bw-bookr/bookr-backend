@@ -19,11 +19,13 @@ router.get('/all_reviews', (req, res) => {
   // retrive reviews for selected book and book details
 router.get('/book_review/:book_id', (req, res) => {
   const { book_id: id } = req.params;
+
   db('books')
   .where({id})
   .then(book=> {
-    db('reviews')
-    .where({book_id: id})
+    db.from('reviews')
+    .innerJoin('users', 'reviews.user_id', 'users.id')
+    .where('book_id',id)
     .then(reviews => {
       res.status(200).json({book: book[0], reviews});
     })

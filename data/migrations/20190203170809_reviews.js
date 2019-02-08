@@ -6,6 +6,8 @@ exports.up = function(knex, Promise) {
     tbl.integer('book_id').unsigned().references('id').inTable('books').notNullable();
     tbl.unique(['user_Id', 'book_id']);
 
+    // tbl.string('username').references('username').inTable(users).notNullable
+
     tbl.integer('rating').notNullable();
 
 
